@@ -18,7 +18,7 @@ export default function SessionsPage() {
         requisicao.catch(erro => {
             console.log(erro)
         })
-    }, []
+    }, [idFilme]
     );
 
     return (

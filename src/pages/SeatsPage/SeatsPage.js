@@ -17,12 +17,11 @@ export default function SeatsPage() {
             setMovie(resposta.data.movie);
             setDay(resposta.data.day);
             setSeats(resposta.data.seats)
-            console.log(resposta.data);
         });
         requisicao.catch(erro => {
             console.log(erro)
         })
-    },[])
+    },[ID_DA_SESSAO])
 
     return (
         <PageContainer>
@@ -33,8 +32,7 @@ export default function SeatsPage() {
                     seat => (
                         <SeatItem
                         key={seat.id}
-                        //condition ? exprIfTrue : exprIfFalse
-                        cor={seat.isAvailable ? "#C3CFD9" : "#FBE192"}
+                        color={seat.isAvailable ? "#C3CFD9" : "#FBE192"}
                         border={seat.isAvailable ? "#7B8B99" : "#F7C52B"}>
                             {seat.name}
                         </SeatItem>
@@ -44,7 +42,7 @@ export default function SeatsPage() {
 
             <CaptionContainer>
                 <CaptionItem>
-                    <CaptionCircle border="#0E7D71" cor="#1AAE9E"/>
+                    <CaptionCircle border="#0E7D71" color="#1AAE9E"/>
                     Selecionado
                 </CaptionItem>
                 <CaptionItem>
@@ -125,7 +123,7 @@ const CaptionContainer = styled.div`
 `
 const CaptionCircle = styled.div`
     border: 1px solid ${(props) => props.border};
-    background-color: ${(props) => props.cor};
+    background-color: ${(props) => props.color};
     height: 25px;
     width: 25px;
     border-radius: 25px;
@@ -142,7 +140,7 @@ const CaptionItem = styled.div`
 `
 const SeatItem = styled.div`
     border: 1px solid ${(props) => props.border};
-    background-color: ${(props) => props.cor};
+    background-color: ${(props) => props.color};
     height: 25px;
     width: 25px;
     border-radius: 25px;
