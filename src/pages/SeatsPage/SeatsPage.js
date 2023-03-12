@@ -27,8 +27,11 @@ export default function SeatsPage() {
     function selecionar(seat){
         if(seat.isAvailable === false ){
             return
+        } else {
+            const ids = [...selecionados, seat.id];
+            setSelecionados([...selecionados, seat.id]);
+            console.log(ids)
         }
-
     }
 
     return (
@@ -41,8 +44,8 @@ export default function SeatsPage() {
                         <SeatItem
                         key={seat.id}
                         onClick={()=> selecionar(seat)}
-                        color={seat.isAvailable ? "#C3CFD9" : "#FBE192"}
-                        border={seat.isAvailable ? "#7B8B99" : "#F7C52B"}
+                        color={selecionados.includes(seat.id) ? "#1AAE9E" : (seat.isAvailable ? "#C3CFD9" : "#FBE192")}
+                        border={selecionados.includes(seat.id) ? "#0E7D71" : ((seat.isAvailable ? "#7B8B99" : "#F7C52B"))}
                         cursor={seat.isAvailable ? "pointer" : "not-allowed"}
                         >
                             {seat.name}
