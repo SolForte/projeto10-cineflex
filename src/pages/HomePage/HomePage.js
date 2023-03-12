@@ -21,7 +21,7 @@ export default function HomePage() {
             <ListContainer>
                 {filmes.map(
                     filme => (
-                        <MovieContainer>
+                        <MovieContainer key={filme.id}>
                             <img src={filme.posterURL} alt={"Poster do filme: "+filme.title}/>
                         </MovieContainer>
                     )
