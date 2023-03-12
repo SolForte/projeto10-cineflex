@@ -4,14 +4,15 @@ import styled from "styled-components";
 import axios from "axios";
 
 export default function SeatsPage() {
-    const ID_DA_SESSAO = useParams();
+    const idSessao = useParams();
     const [filme,setFilme] = useState([]);
     const [movie, setMovie] = useState([]);
     const [day, setDay] = useState([]);
     const [seats,setSeats] = useState([]);
+    const [selecionados, setSelecionados] = useState([]);
 
     useEffect(()=>{  
-        const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${ID_DA_SESSAO["idSessao"]}/seats`);
+        const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao["idSessao"]}/seats`);
         requisicao.then(resposta => {
             setFilme(resposta.data);
             setMovie(resposta.data.movie);
@@ -21,7 +22,14 @@ export default function SeatsPage() {
         requisicao.catch(erro => {
             console.log(erro)
         })
-    },[ID_DA_SESSAO])
+    },[idSessao])
+
+    function selecionar(seat){
+        if(seat.isAvailable === false ){
+            return
+        }
+
+    }
 
     return (
         <PageContainer>
@@ -32,8 +40,11 @@ export default function SeatsPage() {
                     seat => (
                         <SeatItem
                         key={seat.id}
+                        onClick={()=> selecionar(seat)}
                         color={seat.isAvailable ? "#C3CFD9" : "#FBE192"}
-                        border={seat.isAvailable ? "#7B8B99" : "#F7C52B"}>
+                        border={seat.isAvailable ? "#7B8B99" : "#F7C52B"}
+                        cursor={seat.isAvailable ? "pointer" : "not-allowed"}
+                        >
                             {seat.name}
                         </SeatItem>
                     )
@@ -41,16 +52,16 @@ export default function SeatsPage() {
             </SeatsContainer>
 
             <CaptionContainer>
-                <CaptionItem>
+                <CaptionItem cursor="default">
                     <CaptionCircle border="#0E7D71" color="#1AAE9E"/>
                     Selecionado
                 </CaptionItem>
-                <CaptionItem>
-                    <CaptionCircle border="#7B8B99" cor="#C3CFD9"/>
+                <CaptionItem cursor="default">
+                    <CaptionCircle border="#7B8B99" color="#C3CFD9"/>
                     Disponível
                 </CaptionItem>
-                <CaptionItem>
-                    <CaptionCircle border="#F7C52B" cor="#FBE192"/>
+                <CaptionItem cursor="default">
+                    <CaptionCircle border="#F7C52B" color="#FBE192"/>
                     Indisponível
                 </CaptionItem>
             </CaptionContainer>
@@ -137,6 +148,7 @@ const CaptionItem = styled.div`
     flex-direction: column;
     align-items: center;
     font-size: 12px;
+    cursor: ${props => props.cursor};
 `
 const SeatItem = styled.div`
     border: 1px solid ${(props) => props.border};
@@ -150,6 +162,7 @@ const SeatItem = styled.div`
     align-items: center;
     justify-content: center;
     margin: 5px 3px;
+    cursor: ${props => props.cursor};
 `
 const FooterContainer = styled.div`
     width: 100%;
