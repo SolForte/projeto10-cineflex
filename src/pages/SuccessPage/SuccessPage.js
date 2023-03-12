@@ -1,6 +1,11 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-export default function SuccessPage({pedido}) {
+export default function SuccessPage({pedido, setPedido}) {
+
+    function limpar(){
+        setPedido([])
+    }
     return (
         <PageContainer>
             <h1>Pedido feito <br /> com sucesso!</h1>
@@ -24,8 +29,9 @@ export default function SuccessPage({pedido}) {
                 <p>Nome: {pedido.nome}</p>
                 <p>CPF: {pedido.cpf}</p>
             </TextContainer>
-
-            <button>Voltar para Home</button>
+            <Link to="/" onClick={limpar}>
+                <button>Voltar para Home</button>
+            </Link>
         </PageContainer>
     )
 }

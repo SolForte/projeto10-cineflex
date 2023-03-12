@@ -43,8 +43,9 @@ export default function SeatsPage({setPedido}) {
             alert("Selecione pelo menos 1 assento.");
             return;
         }
-        const corpo = {ids: selecionados.map((elemento) => elemento.id), name:nome, cpf:cpf}
-/*         const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", corpo)
+        //const corpo = {ids: selecionados.map((elemento) => elemento.id), name:nome, cpf:cpf}
+/*      
+        const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", corpo)
         requisicao.then(resposta => {
             setPedido({filme, selecionados, nome, cpf});
             console.log(filme)
@@ -53,7 +54,8 @@ export default function SeatsPage({setPedido}) {
         requisicao.catch(erro => {
             console.log(erro)
             alert("Atualize a página e tente de novo.")
-        }) */
+        })
+        */
         setPedido({filme, selecionados, nome, cpf});
         navigate("/sucesso");
     }
