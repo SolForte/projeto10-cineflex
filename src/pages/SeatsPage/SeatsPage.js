@@ -43,21 +43,16 @@ export default function SeatsPage({setPedido}) {
             alert("Selecione pelo menos 1 assento.");
             return;
         }
-        //const corpo = {ids: selecionados.map((elemento) => elemento.id), name:nome, cpf:cpf}
-/*      
+        const corpo = {ids: selecionados.map((elemento) => elemento.id), name:nome, cpf:cpf} 
         const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", corpo)
         requisicao.then(resposta => {
             setPedido({filme, selecionados, nome, cpf});
-            console.log(filme)
-            navigate("/sucesso");
+            navigate("/sucesso");;
 		});
         requisicao.catch(erro => {
             console.log(erro)
             alert("Atualize a página e tente de novo.")
         })
-        */
-        setPedido({filme, selecionados, nome, cpf});
-        navigate("/sucesso");
     }
 
     return (
@@ -110,7 +105,7 @@ export default function SeatsPage({setPedido}) {
                     <input 
                         placeholder="Digite seu CPF..."
                         type="number"
-                        pettern="\d{11}"
+                        pettern="[0-9]{11}"
                         value={cpf}
                         onChange={(event) => setCpf(event.target.value)}
                         required
