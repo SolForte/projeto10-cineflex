@@ -8,16 +8,16 @@ export default function SuccessPage({ pedido, setPedido }) {
 
   let converted = undefined;
 
-  const quantidade_de_digitos_do_cpf = 11;
-  const quantidade_de_elementos_antes_do_primeiro_ponto = 3;
-  const quantidade_de_elementos_antes_do_segundo_ponto = 7;
-  const quantidade_de_elementos_antes_do_hifen = 11;
+  const QUANTIDADE_DE_DIGITOS_DO_CPF = 11;
+  const QUANTIDADE_DE_ELEMENTOS_ANTES_DO_PRIMEIRO_PONTO = 3;
+  const QUANTIDADE_DE_ELEMENTOS_ANTES_DO_SEGUNDO_PONTO = 7;
+  const QUANTIDADE_DE_ELEMENTOS_ANTES_DO_HIFEN = 11;
 
-  if (pedido.cpf.length === quantidade_de_digitos_do_cpf) {
+  if (pedido.cpf.length === QUANTIDADE_DE_DIGITOS_DO_CPF) {
     const transform = splitIntoArray(pedido.cpf);
-    transform.splice(quantidade_de_elementos_antes_do_primeiro_ponto, 0, ".");
-    transform.splice(quantidade_de_elementos_antes_do_segundo_ponto, 0, ".");
-    transform.splice(quantidade_de_elementos_antes_do_hifen, 0, "-");
+    transform.splice(QUANTIDADE_DE_ELEMENTOS_ANTES_DO_PRIMEIRO_PONTO, 0, ".");
+    transform.splice(QUANTIDADE_DE_ELEMENTOS_ANTES_DO_SEGUNDO_PONTO, 0, ".");
+    transform.splice(QUANTIDADE_DE_ELEMENTOS_ANTES_DO_HIFEN, 0, "-");
     converted = transform;
   }
 
