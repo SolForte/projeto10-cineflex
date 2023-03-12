@@ -27,10 +27,10 @@ export default function SeatsPage() {
     function selecionar(seat){
         if(seat.isAvailable === false ){
             return
-        } else {
-            const ids = [...selecionados, seat.id];
+        } else if (!selecionados.includes(seat.id)){
             setSelecionados([...selecionados, seat.id]);
-            console.log(ids)
+        } else {
+            setSelecionados([...selecionados.filter(id=>(id !== seat.id))])
         }
     }
 
