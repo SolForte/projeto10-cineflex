@@ -9,8 +9,8 @@ export default function SuccessPage({ pedido, setPedido }) {
   let converted = undefined;
 
   const IhateMagicNumbersJeitinhoBrasileiro3 = [
-    "1  (1º)", 
-    "2  (2º)", 
+    "1  (1º)",
+    "2  (2º)",
     "3  (3º)"];
   const IhateMagicNumbersJeitinhoBrasileiro7 = [
     "1  (1º)",
@@ -35,7 +35,7 @@ export default function SuccessPage({ pedido, setPedido }) {
     "9  (11º)",
   ];
 
-  if (pedido.cpf.length === 11) {
+  if (pedido.cpf.length === IhateMagicNumbersJeitinhoBrasileiro11.length) {
     const transform = splitIntoArray(pedido.cpf);
     transform.splice(IhateMagicNumbersJeitinhoBrasileiro3.length, 0, ".");
     transform.splice(IhateMagicNumbersJeitinhoBrasileiro7.length, 0, ".");
