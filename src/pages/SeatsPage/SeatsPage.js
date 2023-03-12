@@ -58,7 +58,7 @@ export default function SeatsPage({ setPedido }) {
       "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
       corpo
     );
-    requisicao.then((resposta) => {
+    requisicao.then(() => {
       setPedido({ filme, selecionados, nome, cpf });
       navigate("/sucesso");
     });
