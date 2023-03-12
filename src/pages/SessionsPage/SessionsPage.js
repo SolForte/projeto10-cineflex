@@ -5,54 +5,50 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function SessionsPage() {
-    const [filme, setFilme] = useState([])
-    const idFilme = useParams();
-    const [days, setDays] = useState([]);
+  const [filme, setFilme] = useState([]);
+  const idFilme = useParams();
+  const [days, setDays] = useState([]);
 
-    useEffect(()=>{
-        const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme["idFilme"]}/showtimes`)
-        requisicao.then(resposta => {
-			setFilme(resposta.data);
-            setDays(resposta.data.days);
-		});
-        requisicao.catch(erro => {
-            console.log(erro)
-        })
-    }, [idFilme]
+  useEffect(() => {
+    const requisicao = axios.get(
+      `https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme["idFilme"]}/showtimes`
     );
+    requisicao.then((resposta) => {
+      setFilme(resposta.data);
+      setDays(resposta.data.days);
+    });
+    requisicao.catch((erro) => {
+      console.log(erro);
+    });
+  }, [idFilme]);
 
-    return (
-        <PageContainer>
-            Selecione o horário
-            <div>
-                {days.map(
-                        propriedades => 
-                            <SessionContainer key={propriedades.id} data-test="movie-day">
-                                {propriedades.weekday} - {propriedades.date}
-                                <ButtonsContainer>
-                                    {propriedades.showtimes.map(
-                                        propriedades =>
-                                            <Link to={`/assentos/${propriedades.id}`} key={propriedades.id}>
-                                                <button data-test="showtime">{propriedades.name}</button>
-                                            </Link>
-                                    )}
-                                </ButtonsContainer>
-                            </SessionContainer>
-                        )
-                }
-            </div>
-
-            <FooterContainer data-test="footer">
-                <div>
-                    <img src={filme.posterURL} alt={`Poster do filme: ${filme.title}`} />
-                </div>
-                <div>
-                    <p>{filme.title}</p>
-                </div>
-            </FooterContainer>
-
-        </PageContainer>
-    )
+  return (
+    <PageContainer>
+      Selecione o horário
+      <div>
+        {days.map((propriedades) => (
+          <SessionContainer key={propriedades.id} data-test="movie-day">
+            {propriedades.weekday} - {propriedades.date}
+            <ButtonsContainer>
+              {propriedades.showtimes.map((propriedades) => (
+                <Link to={`/assentos/${propriedades.id}`} key={propriedades.id}>
+                  <button data-test="showtime">{propriedades.name}</button>
+                </Link>
+              ))}
+            </ButtonsContainer>
+          </SessionContainer>
+        ))}
+      </div>
+      <FooterContainer data-test="footer">
+        <div>
+          <img src={filme.posterURL} alt={`Poster do filme: ${filme.title}`} />
+        </div>
+        <div>
+          <p>{filme.title}</p>
+        </div>
+      </FooterContainer>
+    </PageContainer>
+  );
 }
 
 const PageContainer = styled.div`
@@ -68,7 +64,7 @@ const PageContainer = styled.div`
     div {
         margin-top: 20px;
     }
-`
+`;
 const SessionContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -77,7 +73,7 @@ const SessionContainer = styled.div`
     font-size: 20px;
     color: #293845;
     padding: 0 20px;
-`
+`;
 const ButtonsContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -88,7 +84,7 @@ const ButtonsContainer = styled.div`
     a {
         text-decoration: none;
     }
-`
+`;
 const FooterContainer = styled.div`
     width: 100%;
     height: 120px;
@@ -126,4 +122,4 @@ const FooterContainer = styled.div`
             }
         }
     }
-`
+`;

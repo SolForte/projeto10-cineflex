@@ -1,39 +1,40 @@
-import styled from "styled-components"
-import { useEffect, useState } from "react"
+import styled from "styled-components";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
-    const [filmes, setFilmes] = useState([])
+  const [filmes, setFilmes] = useState([]);
 
-    useEffect(() => {
-		const requisicao = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
-		requisicao.then(resposta => {
-			setFilmes(resposta.data);
-		});
-        requisicao.catch(erro => {
-            console.log(erro)
-        })
-	}, []);
+  useEffect(() => {
+    const requisicao = axios.get(
+      "https://mock-api.driven.com.br/api/v8/cineflex/movies"
+    );
+    requisicao.then((resposta) => {
+      setFilmes(resposta.data);
+    });
+    requisicao.catch((erro) => {
+      console.log(erro);
+    });
+  }, []);
 
-    return (
-        <PageContainer>
-            Selecione o filme
-            <ListContainer>
-                {filmes.map(
-                    filme => (
-                        <MovieContainer key={filme.id} data-test="movie">
-                            <Link to={`/sessoes/${filme.id}`}>
-                                <img src={filme.posterURL} alt={`Poster do filme: ${filme.title}`}/>
-                            </Link>
-                        </MovieContainer>
-                    )
-                )
-                }
-            </ListContainer>
-
-        </PageContainer>
-    )
+  return (
+    <PageContainer>
+      Selecione o filme
+      <ListContainer>
+        {filmes.map((filme) => (
+          <MovieContainer key={filme.id} data-test="movie">
+            <Link to={`/sessoes/${filme.id}`}>
+              <img
+                src={filme.posterURL}
+                alt={`Poster do filme: ${filme.title}`}
+              />
+            </Link>
+          </MovieContainer>
+        ))}
+      </ListContainer>
+    </PageContainer>
+  );
 }
 
 const PageContainer = styled.div`
@@ -46,14 +47,14 @@ const PageContainer = styled.div`
     color: #293845;
     margin-top: 30px;
     padding-top: 70px;
-`
+`;
 const ListContainer = styled.div`
     width: 330px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     padding: 10px;
-`
+`;
 const MovieContainer = styled.div`
     width: 145px;
     height: 210px;
@@ -67,4 +68,4 @@ const MovieContainer = styled.div`
         width: 130px;
         height: 190px;
     }
-`
+`;
