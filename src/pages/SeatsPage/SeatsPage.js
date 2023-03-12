@@ -1,6 +1,26 @@
-import styled from "styled-components"
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import axios from "axios";
 
 export default function SeatsPage() {
+    const ID_DA_SESSAO = useParams();
+    const [filme,setFilme] = useState([]);
+    const [movie, setMovie] = useState([])
+    const [day, setDay] = useState([])
+
+    useEffect(()=>{  
+        const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${ID_DA_SESSAO["idSessao"]}/seats`);
+        requisicao.then(resposta => {
+            setFilme(resposta.data);
+            setMovie(resposta.data.movie);
+            setDay(resposta.data.day);
+            console.log(resposta.data);
+        });
+        requisicao.catch(erro => {
+            console.log(erro)
+        })
+    },[])
 
     return (
         <PageContainer>
@@ -41,11 +61,11 @@ export default function SeatsPage() {
 
             <FooterContainer>
                 <div>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster" />
+                    <img src={movie.posterURL} alt={`Poster do filme ${movie.title}`} />
                 </div>
                 <div>
-                    <p>Tudo em todo lugar ao mesmo tempo</p>
-                    <p>Sexta - 14h00</p>
+                    <p>{movie.title}</p>
+                    <p>{day.weekday} - {filme.name}</p>
                 </div>
             </FooterContainer>
 

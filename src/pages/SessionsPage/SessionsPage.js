@@ -32,7 +32,7 @@ export default function SessionsPage() {
                                 <ButtonsContainer>
                                     {propriedades.showtimes.map(
                                         propriedades =>
-                                            <Link to={`/assentos/${propriedades.id}`}>
+                                            <Link to={`/assentos/${propriedades.id}`} key={propriedades.id}>
                                                 <button>{propriedades.name}</button>
                                             </Link>
                                     )}
