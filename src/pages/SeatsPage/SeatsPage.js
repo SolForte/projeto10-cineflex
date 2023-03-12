@@ -31,7 +31,13 @@ export default function SeatsPage() {
             <SeatsContainer>
                 {seats.map(
                     seat => (
-                        <SeatItem key={seat.id}>{seat.name}</SeatItem>
+                        <SeatItem
+                        key={seat.id}
+                        //condition ? exprIfTrue : exprIfFalse
+                        cor={seat.isAvailable ? "#C3CFD9" : "#FBE192"}
+                        border={seat.isAvailable ? "#7B8B99" : "#F7C52B"}>
+                            {seat.name}
+                        </SeatItem>
                     )
                 )}
             </SeatsContainer>
