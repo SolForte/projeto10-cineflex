@@ -3,9 +3,24 @@ import { Link } from "react-router-dom"
 
 export default function SuccessPage({pedido, setPedido}) {
 
+    function splitIntoArray(num) {
+        return Array.from(String(num), Number);
+    }
+
+    let converted = undefined;
+
+    if (pedido.cpf.length === 11){
+      const transform = splitIntoArray(pedido.cpf)
+      transform.splice(3,0,".");
+      transform.splice(7,0,".");
+      transform.splice(11,0,"-");
+      converted = transform; 
+    }
+
     function limpar(){
         setPedido([])
     }
+
     return (
         <PageContainer>
             <h1>Pedido feito <br /> com sucesso!</h1>
@@ -27,7 +42,7 @@ export default function SuccessPage({pedido, setPedido}) {
             <TextContainer>
                 <strong><p>Comprador</p></strong>
                 <p>Nome: {pedido.nome}</p>
-                <p>CPF: {pedido.cpf}</p>
+                <p>CPF: {converted ? converted : pedido.cpf}</p>
             </TextContainer>
             <Link to="/" onClick={limpar}>
                 <button>Voltar para Home</button>
