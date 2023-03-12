@@ -8,38 +8,16 @@ export default function SuccessPage({ pedido, setPedido }) {
 
   let converted = undefined;
 
-  const IhateMagicNumbersJeitinhoBrasileiro3 = [
-    "1  (1º)",
-    "2  (2º)",
-    "3  (3º)"];
-  const IhateMagicNumbersJeitinhoBrasileiro7 = [
-    "1  (1º)",
-    "2  (2º)",
-    "3  (3º)",
-    ".  (4º)",
-    "4  (5º)",
-    "5  (6º)",
-    "6  (7º)",
-  ];
-  const IhateMagicNumbersJeitinhoBrasileiro11 = [
-    "1  (1º)",
-    "2  (2º)",
-    "3  (3º)",
-    ".  (4º)",
-    "4  (5º)",
-    "5  (6º)",
-    "6  (7º)",
-    ".  (8º)",
-    "7  (9º)",
-    "8  (10º)",
-    "9  (11º)",
-  ];
+  const quantidade_de_digitos_do_cpf = 11;
+  const quantidade_de_elementos_antes_do_primeiro_ponto = 3;
+  const quantidade_de_elementos_antes_do_segundo_ponto = 7;
+  const quantidade_de_elementos_antes_do_hifen = 11;
 
-  if (pedido.cpf.length === IhateMagicNumbersJeitinhoBrasileiro11.length) {
+  if (pedido.cpf.length === quantidade_de_digitos_do_cpf) {
     const transform = splitIntoArray(pedido.cpf);
-    transform.splice(IhateMagicNumbersJeitinhoBrasileiro3.length, 0, ".");
-    transform.splice(IhateMagicNumbersJeitinhoBrasileiro7.length, 0, ".");
-    transform.splice(IhateMagicNumbersJeitinhoBrasileiro11.length, 0, "-");
+    transform.splice(quantidade_de_elementos_antes_do_primeiro_ponto, 0, ".");
+    transform.splice(quantidade_de_elementos_antes_do_segundo_ponto, 0, ".");
+    transform.splice(quantidade_de_elementos_antes_do_hifen, 0, "-");
     converted = transform;
   }
 
