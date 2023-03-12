@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
-export default function SeatsPage({pedido, setPedido}) {
+export default function SeatsPage({setPedido}) {
     const idSessao = useParams();
     const [filme,setFilme] = useState([]);
     const [movie, setMovie] = useState([]);
@@ -44,7 +44,6 @@ export default function SeatsPage({pedido, setPedido}) {
             return;
         }
         const corpo = {ids: selecionados.map((elemento) => elemento.id), name:nome, cpf:cpf}
-        console.log(corpo)
 /*         const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", corpo)
         requisicao.then(resposta => {
             setPedido({filme, selecionados, nome, cpf});
@@ -56,12 +55,8 @@ export default function SeatsPage({pedido, setPedido}) {
             alert("Atualize a página e tente de novo.")
         }) */
         setPedido({filme, selecionados, nome, cpf});
-        console.log(filme)
-        console.log(pedido)
         navigate("/sucesso");
     }
-
-    console.log(pedido)
 
     return (
         <PageContainer>
