@@ -1,6 +1,23 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function SessionsPage() {
+    const [filme, setFilme] = useState([])
+    const idFilme = useParams();
+
+    useEffect(()=>{
+        const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme["idFilme"]}/showtimes`)
+        requisicao.then(resposta => {
+			setFilme(resposta.data);
+		});
+        requisicao.catch(erro => {
+            console.log(erro)
+        })
+    }, []
+    );
 
     return (
         <PageContainer>
