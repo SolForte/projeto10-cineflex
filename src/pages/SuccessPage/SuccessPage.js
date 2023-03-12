@@ -8,11 +8,38 @@ export default function SuccessPage({ pedido, setPedido }) {
 
   let converted = undefined;
 
+  const IhateMagicNumbersJeitinhoBrasileiro3 = [
+    "1  (1º)", 
+    "2  (2º)", 
+    "3  (3º)"];
+  const IhateMagicNumbersJeitinhoBrasileiro7 = [
+    "1  (1º)",
+    "2  (2º)",
+    "3  (3º)",
+    ".  (4º)",
+    "4  (5º)",
+    "5  (6º)",
+    "6  (7º)",
+  ];
+  const IhateMagicNumbersJeitinhoBrasileiro11 = [
+    "1  (1º)",
+    "2  (2º)",
+    "3  (3º)",
+    ".  (4º)",
+    "4  (5º)",
+    "5  (6º)",
+    "6  (7º)",
+    ".  (8º)",
+    "7  (9º)",
+    "8  (10º)",
+    "9  (11º)",
+  ];
+
   if (pedido.cpf.length === 11) {
     const transform = splitIntoArray(pedido.cpf);
-    transform.splice(3, 0, ".");
-    transform.splice(7, 0, ".");
-    transform.splice(11, 0, "-");
+    transform.splice(IhateMagicNumbersJeitinhoBrasileiro3.length, 0, ".");
+    transform.splice(IhateMagicNumbersJeitinhoBrasileiro7.length, 0, ".");
+    transform.splice(IhateMagicNumbersJeitinhoBrasileiro11.length, 0, "-");
     converted = transform;
   }
 

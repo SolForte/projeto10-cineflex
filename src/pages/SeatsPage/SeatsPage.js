@@ -52,7 +52,7 @@ export default function SeatsPage({ setPedido }) {
     const corpo = {
       ids: selecionados.map((elemento) => elemento.id),
       name: nome,
-      cpf: cpf,
+      cpf,
     };
     const requisicao = axios.post(
       "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
