@@ -9,7 +9,6 @@ export default function HomePage() {
 		const requisicao = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
 		requisicao.then(resposta => {
 			setFilmes(resposta.data);
-            console.log(resposta.data)
 		});
         requisicao.catch(erro => {
             console.log(erro)
@@ -19,30 +18,15 @@ export default function HomePage() {
     return (
         <PageContainer>
             Selecione o filme
-
             <ListContainer>
-
-
-
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-
-
+                {filmes.map(
+                    filme => (
+                        <MovieContainer>
+                            <img src={filme.posterURL} alt={"Poster do filme: "+filme.title}/>
+                        </MovieContainer>
+                    )
+                )
+                }
             </ListContainer>
 
         </PageContainer>
