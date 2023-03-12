@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import styled from "styled-components"
 import HomePage from "./pages/HomePage/HomePage"
@@ -6,6 +7,7 @@ import SessionsPage from "./pages/SessionsPage/SessionsPage"
 import SuccessPage from "./pages/SuccessPage/SuccessPage"
 
 export default function App() {
+    const [pedido, setPedido] = useState([]);
     return (
         <>
         <BrowserRouter>
@@ -13,8 +15,8 @@ export default function App() {
            <Routes>
                 <Route path="/" element={<HomePage />}/>
                 <Route  path="/sessoes/:idFilme" element={<SessionsPage />}/>
-                <Route  path="/assentos/:idSessao" element={<SeatsPage />}/>
-                <Route  path="/sucesso" element={<SuccessPage />}/>
+                <Route  path="/assentos/:idSessao" element={<SeatsPage setPedido={setPedido}/>}/>
+                <Route  path="/sucesso" element={<SuccessPage  pedido={pedido}/>}/>
            </Routes>
         </BrowserRouter>
         </>

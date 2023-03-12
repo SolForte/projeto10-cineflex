@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 
-export default function SeatsPage() {
+export default function SeatsPage({pedido, setPedido}) {
     const idSessao = useParams();
     const [filme,setFilme] = useState([]);
     const [movie, setMovie] = useState([]);
@@ -13,6 +12,7 @@ export default function SeatsPage() {
     const [selecionados, setSelecionados] = useState([]);
     const [nome, setNome] = useState([]);
     const [cpf, setCpf] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{  
         const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao["idSessao"]}/seats`);
@@ -30,10 +30,10 @@ export default function SeatsPage() {
     function selecionar(seat){
         if(seat.isAvailable === false ){
             return
-        } else if (!selecionados.includes(seat.id)){
-            setSelecionados([...selecionados, seat.id]);
+        } else if (!selecionados.includes(seat)){
+            setSelecionados([...selecionados, seat]);
         } else {
-            setSelecionados([...selecionados.filter(id=>(id !== seat.id))])
+            setSelecionados([...selecionados.filter(elemento=>(elemento.id !== seat.id))])
         }
     }
 
@@ -43,9 +43,25 @@ export default function SeatsPage() {
             alert("Selecione pelo menos 1 assento.");
             return;
         }
-        const corpoDaRequisicao = {ids: selecionados, name:nome, cpf:cpf}
-        console.log(corpoDaRequisicao)
+        const corpo = {ids: selecionados.map((elemento) => elemento.id), name:nome, cpf:cpf}
+        console.log(corpo)
+/*         const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", corpo)
+        requisicao.then(resposta => {
+            setPedido({filme, selecionados, nome, cpf});
+            console.log(filme)
+            navigate("/sucesso");
+		});
+        requisicao.catch(erro => {
+            console.log(erro)
+            alert("Atualize a página e tente de novo.")
+        }) */
+        setPedido({filme, selecionados, nome, cpf});
+        console.log(filme)
+        console.log(pedido)
+        navigate("/sucesso");
     }
+
+    console.log(pedido)
 
     return (
         <PageContainer>
@@ -57,8 +73,8 @@ export default function SeatsPage() {
                         <SeatItem
                         key={seat.id}
                         onClick={()=> selecionar(seat)}
-                        color={selecionados.includes(seat.id) ? "#1AAE9E" : (seat.isAvailable ? "#C3CFD9" : "#FBE192")}
-                        border={selecionados.includes(seat.id) ? "#0E7D71" : ((seat.isAvailable ? "#7B8B99" : "#F7C52B"))}
+                        color={selecionados.includes(seat) ? "#1AAE9E" : (seat.isAvailable ? "#C3CFD9" : "#FBE192")}
+                        border={selecionados.includes(seat) ? "#0E7D71" : ((seat.isAvailable ? "#7B8B99" : "#F7C52B"))}
                         cursor={seat.isAvailable ? "pointer" : "not-allowed"}
                         >
                             {seat.name}
