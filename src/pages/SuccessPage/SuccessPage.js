@@ -25,13 +25,13 @@ export default function SuccessPage({pedido, setPedido}) {
         <PageContainer>
             <h1>Pedido feito <br /> com sucesso!</h1>
 
-            <TextContainer>
+            <TextContainer data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
                 <p>{pedido.filme.movie.title}</p>
                 <p>{pedido.filme.day.date} - {pedido.filme.name}</p>
             </TextContainer>
 
-            <TextContainer>
+            <TextContainer data-test="seats-info">
                 <strong><p>Ingressos</p></strong>
                 {pedido.selecionados.map(
                     (elemento)=>(
@@ -39,12 +39,12 @@ export default function SuccessPage({pedido, setPedido}) {
                     )
                 )}
             </TextContainer>
-            <TextContainer>
+            <TextContainer data-test="client-info">
                 <strong><p>Comprador</p></strong>
                 <p>Nome: {pedido.nome}</p>
                 <p>CPF: {converted ? converted : pedido.cpf}</p>
             </TextContainer>
-            <Link to="/" onClick={limpar}>
+            <Link data-test="go-home-btn" to="/" onClick={limpar}>
                 <button>Voltar para Home</button>
             </Link>
         </PageContainer>

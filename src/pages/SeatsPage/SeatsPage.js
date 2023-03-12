@@ -67,6 +67,7 @@ export default function SeatsPage({setPedido}) {
                 {seats.map(
                     seat => (
                         <SeatItem
+                        data-test="seat"
                         key={seat.id}
                         onClick={()=> selecionar(seat)}
                         color={selecionados.includes(seat) ? "#1AAE9E" : (seat.isAvailable ? "#C3CFD9" : "#FBE192")}
@@ -98,6 +99,7 @@ export default function SeatsPage({setPedido}) {
                 <form onSubmit={reservar}>
                     Nome do Comprador:
                     <input
+                        data-test="client-name"
                         placeholder="Digite seu nome..."
                         type="text"
                         value={nome}
@@ -107,6 +109,7 @@ export default function SeatsPage({setPedido}) {
 
                     CPF do Comprador:
                     <input 
+                        data-test="client-cpf"
                         placeholder="Digite seu CPF..."
                         type="number"
                         pettern="[0-9]{11}"
@@ -114,11 +117,11 @@ export default function SeatsPage({setPedido}) {
                         onChange={(event) => setCpf(event.target.value)}
                         required
                         />
-                    <button type="submit">Reservar Assento(s)</button>
+                    <button data-test="book-seat-btn" type="submit">Reservar Assento(s)</button>
                 </form>
             </FormContainer>
 
-            <FooterContainer>
+            <FooterContainer data-test="footer">
                 <div>
                     <img src={movie.posterURL} alt={`Poster do filme ${movie.title}`} />
                 </div>
