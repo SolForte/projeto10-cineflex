@@ -6,8 +6,9 @@ import axios from "axios";
 export default function SeatsPage() {
     const ID_DA_SESSAO = useParams();
     const [filme,setFilme] = useState([]);
-    const [movie, setMovie] = useState([])
-    const [day, setDay] = useState([])
+    const [movie, setMovie] = useState([]);
+    const [day, setDay] = useState([]);
+    const [seats,setSeats] = useState([]);
 
     useEffect(()=>{  
         const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${ID_DA_SESSAO["idSessao"]}/seats`);
@@ -15,6 +16,7 @@ export default function SeatsPage() {
             setFilme(resposta.data);
             setMovie(resposta.data.movie);
             setDay(resposta.data.day);
+            setSeats(resposta.data.seats)
             console.log(resposta.data);
         });
         requisicao.catch(erro => {
@@ -27,11 +29,11 @@ export default function SeatsPage() {
             Selecione o(s) assento(s)
 
             <SeatsContainer>
-                <SeatItem>01</SeatItem>
-                <SeatItem>02</SeatItem>
-                <SeatItem>03</SeatItem>
-                <SeatItem>04</SeatItem>
-                <SeatItem>05</SeatItem>
+                {seats.map(
+                    seat => (
+                        <SeatItem key={seat.id}>{seat.name}</SeatItem>
+                    )
+                )}
             </SeatsContainer>
 
             <CaptionContainer>
