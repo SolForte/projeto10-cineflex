@@ -29,7 +29,8 @@ export default function SeatsPage({setPedido}) {
 
     function selecionar(seat){
         if(seat.isAvailable === false ){
-            return
+            alert("Esse assento não está disponível");
+            return;
         } else if (!selecionados.includes(seat)){
             setSelecionados([...selecionados, seat]);
         } else {
