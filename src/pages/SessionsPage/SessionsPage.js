@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 export default function SessionsPage() {
     const [filme, setFilme] = useState([])
     const idFilme = useParams();
+    const [days, setDays] = useState([]);
 
     useEffect(()=>{
         const requisicao = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme["idFilme"]}/showtimes`)
         requisicao.then(resposta => {
 			setFilme(resposta.data);
+            setDays(resposta.data.days);
 		});
         requisicao.catch(erro => {
             console.log(erro)
@@ -23,29 +25,19 @@ export default function SessionsPage() {
         <PageContainer>
             Selecione o horário
             <div>
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
-
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
-
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <button>14:00</button>
-                        <button>15:00</button>
-                    </ButtonsContainer>
-                </SessionContainer>
+                {days.map(
+                        propriedades => 
+                            <SessionContainer key={propriedades.id}>
+                                {propriedades.weekday} - {propriedades.date}
+                                <ButtonsContainer>
+                                    {propriedades.showtimes.map(
+                                        propriedades =>
+                                            <button key={propriedades.id}>{propriedades.name}</button>
+                                    )}
+                                </ButtonsContainer>
+                            </SessionContainer>
+                        )
+                }
             </div>
 
             <FooterContainer>
