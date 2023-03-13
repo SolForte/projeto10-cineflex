@@ -129,7 +129,7 @@ export default function SeatsPage({ setPedido }) {
           <input
             data-test="client-cpf"
             placeholder="Digite seu CPF..."
-            type="number"
+            type="text"
             pattern="[0-9]{11}"
             value={cpf}
             onChange={(event) => setCpf(event.target.value)}
