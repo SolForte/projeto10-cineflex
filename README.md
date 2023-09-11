@@ -11,7 +11,7 @@ This application emulates a cinema's online ticket/booking system. The basic usa
 </ul>
 
 ## Technologies
-The following dependencies were used on this project:
+The following dependencies and technologies were used on this project:
 
 ![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
