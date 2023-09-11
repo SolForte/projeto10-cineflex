@@ -27,7 +27,6 @@ npm install
 ```
 3. Run the app with
 ```bash
-# development
 npm start
 ````
 4. Run the tests with
