@@ -1,6 +1,8 @@
 # Cineflex
 Cineflex is a Single-Page Application (SPA) for cinema, using React-Router!
 
+![Cineflex](https://i.imgur.com/6uVuXrH.jpg "Cineflex")
+
 ## About
 This application emulates a cinema's online ticket/booking system. The basic usage flow is:
 <ul>
